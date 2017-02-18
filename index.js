@@ -27,10 +27,13 @@ function App() {
       self.sides = parseInt(self.sidesInput.val());
       if (!Number.isInteger(self.sides)) {
         self.sides = defaultSides;
-      } else if (self.sides < defaultSides) {
-        self.sidesInput.val(defaultSides);
-        self.sides = defaultSides;
       }
+
+      const maxEdges = 120;
+      const minEdges = 3;
+
+      self.sides = Math.min(maxEdges, Math.max(minEdges, self.sides));
+      self.sidesInput.val(self.sides);
     });
   }
 

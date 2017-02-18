@@ -12,8 +12,6 @@ const polygonToBuffer = (app, sides, time) => {
     var y1 = Math.sin(finalAngle), y2 = Math.sin(finalAngleOpposite);
     vertexPositions.push([x1, y1, 0]);
     vertexPositions.push([x2, y2, 0]);
-    //console.log('vertex', x1, y1);
-    //console.log('opposite', x2, y2);
   }
 
   // If odd number of sides, add the last vertex
@@ -23,9 +21,6 @@ const polygonToBuffer = (app, sides, time) => {
     vertexPositions.push([x, y, 0]);
   }
 
-  // vertexPositions = translate(vertexPositions, [0.0001*time, 0, 0]);
-
-  //vertexPositions = translate(vertexPositions, [3, 0, 0]);
   app.program.setBuffers({
     'triangle': {
       attribute: 'aVertexPosition',
