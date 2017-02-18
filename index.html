@@ -5,8 +5,20 @@
   <title>Regular Polygon</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" type="text/javascript"></script>
   <script src="PhiloGL.js" type="text/javascript"></script>
+  <script src="rendering.js" type="text/javascript"></script>
   <script src="index.js" type="text/javascript"></script>
 </head>
+
+<style>
+  .flex-container {
+    padding-bottom: 1em;
+    display: flex;
+  }
+
+  .flex-container>* {
+    margin: auto;
+  }
+</style>
 
 <script id="shader-fs" type="x-shader/x-fragment">
   void main(void) {
@@ -25,17 +37,14 @@
   }
 </script>
 
-<body onload="webGLStart();">
-  <div>
-    <form id="sides-form">
-      <label>
-        Number of edges (min 3):
-        <input id="sides" type="number" value="3"/>
-      </label>
-      <button type="submit">Refresh</button>
-    </form>
+<body onload="startApp();">
+  <div class="flex-container">
+    <label>
+      Number of edges (min 3):
+      <input id="sides" type="number" value="3"/>
+    </label>
   </div>
-  <div>
+  <div class="flex-container">
     <canvas id="polygon-canvas" width="640" height="480">
       Your browser doesn't appear to support the
       <code>&lt;canvas&gt;</code> element.
