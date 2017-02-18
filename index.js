@@ -14,7 +14,7 @@ const bindRefresh = (app) => {
 }
 
 const webGLStart = () => {
-  PhiloGL('polygoner', {
+  PhiloGL('polygon-canvas', {
     program: {
       from: 'ids',
       vs: 'shader-vs',
