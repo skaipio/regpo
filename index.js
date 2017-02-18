@@ -5,19 +5,6 @@ function App() {
 
   function main( tFrame ) {
     self.stopMain = window.requestAnimationFrame( main );
-    var nextTick = self.lastTick + self.tickLength;
-    var numTicks = 0;
-
-    //If tFrame < nextTick then 0 ticks need to be updated (0 is default for numTicks).
-    //If tFrame = nextTick then 1 tick needs to be updated (and so forth).
-    //Should keep track of how large numTicks is.
-    //If it is large, then either game was asleep, or the machine cannot keep up.
-    if (tFrame > nextTick) {
-      var timeSinceTick = tFrame - self.lastTick;
-      numTicks = Math.floor( timeSinceTick / self.tickLength );
-    }
-
-    queueUpdates( numTicks );
     render( tFrame );
     self.lastRender = tFrame;
   }
@@ -59,16 +46,13 @@ function App() {
             program = app.program,
             camera = app.cameravar;
 
-
         gl.viewport(0, 0, canvas.width, canvas.height);
         gl.clearColor(0, 0, 0, 1);
         gl.clearDepth(1);
         gl.enable(gl.DEPTH_TEST);
         gl.depthFunc(gl.LEQUAL);
 
-        self.lastTick = performance.now();
-        self.lastRender = self.lastTick; //Pretend the first draw was on first update.
-        self.tickLength = 50; //This sets your simulation to run at 20Hz (50ms)
+        self.lastRender = performance.now();
 
         //setInitialState();
         main(performance.now()); // Start the cycle*/
@@ -79,13 +63,6 @@ function App() {
   function render(tFrame) {
     polygonToBuffer(self.app, self.sides, self.lastRender);
     drawPolygon(self.app, self.sides);
-  }
-
-  function queueUpdates( numTicks ) {
-    for(var i=0; i < numTicks; i++) {
-      self.lastTick = self.lastTick + self.tickLength; //Now lastTick is this tick.
-      //update( self.lastTick );
-    }
   }
 }
 
